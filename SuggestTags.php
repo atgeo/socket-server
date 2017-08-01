@@ -54,7 +54,7 @@ class SuggestTags
     private static function refineString($string)
     {
         // Remove HTML tags
-        $string = html_entity_decode(strip_tags($string));
+        $string = html_entity_decode(str_replace('&nbsp;', ' ', strip_tags($string)));
 
         // Remove punctuation marks
         $string = str_replace(self::$punctuation_marks, '', $string);
@@ -73,7 +73,6 @@ class SuggestTags
 
         // Remove the empty elements, then reset array's indexes
         $words = array_values(array_filter($words));
-        print_r($words);
 
         return $words;
     }
